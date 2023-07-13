@@ -16,13 +16,13 @@ use App\Http\Controllers\Admin\PageController as AdminPageController;
 |
 */
 
-Route::get('/', [GuestsPageController::class, 'home'])->name('guests.home'); 
+Route::get('/', [GuestsPageController::class, 'home'])->name('guests.home');
 
-Route::get('/admin', [AdminPageController::Class, 'dashboard'])->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::get('/admin', [AdminPageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')
-    ->name ('admin.')
-    ->prefix('admin')    
+    ->name('admin.')
+    ->prefix('admin')
     ->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,3 +30,5 @@ Route::middleware('auth')
 });
 
 require __DIR__.'/auth.php';
+
+
