@@ -10,15 +10,15 @@
 
 <body>
 
-    @include('admin.includes.header');
+    @include('admin.includes.header')
 
-    <div class="container">
+    <div class="container-xl">
         <main>
-            @yield ('contents');
+            @yield ('contents')
         </main>
     </div>
 
-    @include('admin.includes.footer');
+    @include('admin.includes.footer')
 
 </body>
 

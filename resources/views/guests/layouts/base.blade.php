@@ -12,7 +12,7 @@
 <body>
     @include('guests.includes.header')
 
-    <div class="container">
+    <div class="container-xl">
         <main>
             @yield('contents')
         </main>
