@@ -12,11 +12,13 @@ class ProjectController extends Controller
         'title'         => 'required|string|min:4|max:50',
         'author'        => 'required|string|max:30',
         'creation_date' => 'required|date',
-        'last_update'   => 'required|date',
-        'collaborators' => 'string|max:150',
-        'description'   => 'string',
-        'languages'     => 'required|string|max:50',
-        'link_github'   => 'required|string|max:150',
+        'collaborators' => 'max:150',
+        'languages'     => 'max:50',
+        'link_github'   => 'required|url|max:150',
+    ];
+
+    private $validation_messages = [
+        'title.required'    => 'Il campo titolo è obbligatorio'
     ];
 
     /**
@@ -49,7 +51,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         // validare i dati
-        $request->validate($this->validations);
+        $request->validate($this->validations, $this->validation_messages);
         $data = $request->all();
 
         // Salvare i dati nel database
@@ -99,7 +101,7 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         // validare i dati
-        $request->validate($this->validations);
+        $request->validate($this->validations, $this->validation_messages);
         $data = $request->all();
 
         // Salvare i dati nel database
@@ -125,6 +127,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return to_route('admin.project.index')->with('delete_success', $project);
     }
 }
