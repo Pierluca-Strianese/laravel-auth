@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}
@@ -26,4 +26,22 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-app-layout --}}
+
+@extends('Admin.layouts.base')
+
+@section('contents')
+    <div class="container">
+
+        <h1>{{ $user->name }}</h1>
+        <div class="mt-5">
+            @include('profile.partials.update-profile-information-form')
+        </div>
+        <div>
+            @include('profile.partials.update-password-form')
+        </div>
+        <div class="mt-5 mb-5">
+            @include('profile.partials.delete-user-form')
+        </div>
+    </div>
+@endsection
