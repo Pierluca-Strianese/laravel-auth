@@ -50,8 +50,8 @@ class ProjectController extends Controller
     {
         // validare i dati
         $request->validate($this->validations);
-
         $data = $request->all();
+
         // Salvare i dati nel database
         $newProject = new Project();
         $newProject->title = $data['title'];
@@ -64,7 +64,7 @@ class ProjectController extends Controller
         $newProject->link_github = $data['link_github'];
         $newProject->save();
 
-        return redirect()->route('Admin.project.show', ['project' => $newProject->id]);
+        return redirect()->route('Admin.project.show', ['project' => $newProject]);
     }
 
     /**
@@ -86,7 +86,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -98,7 +98,23 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        // validare i dati
+        $request->validate($this->validations);
+        $data = $request->all();
+
+        // Salvare i dati nel database
+        $newProject = new Project();
+        $newProject->title = $data['title'];
+        $newProject->author = $data['author'];
+        $newProject->creation_date = $data['creation_date'];
+        $newProject->last_update = $data['last_update'];
+        $newProject->collaborators = $data['collaborators'];
+        $newProject->description = $data['description'];
+        $newProject->languages = $data['languages'];
+        $newProject->link_github = $data['link_github'];
+        $newProject->update();
+
+        return redirect()->route('Admin.project.show', ['project' => $newProject]);
     }
 
     /**
