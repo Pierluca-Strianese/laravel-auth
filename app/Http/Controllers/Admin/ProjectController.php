@@ -77,7 +77,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.project.show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -125,10 +125,37 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
+
+
     public function destroy(Project $project)
     {
         $project->delete();
 
         return to_route('admin.project.index')->with('delete_success', $project);
+    }
+
+    public function restore($id)
+    {
+        Project::withTrashed()->where('id', $id)->restore();
+
+        $project = Project::find($id);
+
+        return to_route('admin.project.trashed')->with('restore_success', $project);
+    }
+
+    public function trashed()
+    {
+        // $projects = project::all(); // SELECT * FROM `projects`
+        $trashedProjects = Project::onlyTrashed()->paginate(6);
+
+        return view('admin.projects.trashed', compact('trashedProjects'));
+    }
+
+    public function harddelete($id)
+    {
+        $project = Project::withTrashed()->find($id);
+        $project->forceDelete();
+
+        return to_route('admin.project.trashed')->with('delete_success', $project);
     }
 }

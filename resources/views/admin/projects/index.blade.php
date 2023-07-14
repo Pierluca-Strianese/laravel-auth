@@ -1,6 +1,17 @@
 @extends('admin.layouts.base')
 
 @section('contents')
+    @if (session('delete_success'))
+        @php $project = session('delete_success') @endphp
+        <div class="alert alert-danger">
+            The project "{{ $project->title }}" has been Deleted
+            <form action="{{ route('admin.project.restore', ['project' => $project]) }}" method="post" class="d-inline-block">
+                @csrf
+                <button class="btn btn-warning">Cancel</button>
+            </form>
+        </div>
+    @endif
+
     <table class="table align-middle">
         <thead>
             <tr>
@@ -28,36 +39,19 @@
                             href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>
                         <a class="btn btn-warning m-1"
                             href="{{ route('admin.project.edit', ['project' => $project->id]) }}">Edit</a>
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" data-id="{{ $project->id }}">
-                            Delete
-                        </button>
+                        <form class="d-inline-block" method="POST"
+                            action="{{ route('admin.project.destroy', ['project' => $project->id]) }}">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete confirmation</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <form action="{{ route('admin.project.destroy', ['project' => $project]) }}" method="post"
-                        class="d-inline-block" id="confirm-delete"
-                        data-template="{{ route('admin.project.destroy', ['project' => '*****']) }}">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-danger">Yes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex justify-content-end p-2">
+        <button class="btn btn-outline-danger"><a class="dropdown-item"
+                href="{{ route('admin.project.trashed') }}">Trash</a></button>
     </div>
 @endsection

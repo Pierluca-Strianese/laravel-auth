@@ -1,6 +1,6 @@
 <div class="bg-danger-subtle p-3 rounded">
     <header>
-        <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger">
+        <div class="h4 p-2 mb-4 text-danger border-bottom border-danger">
             {{ __('Delete Account') }}
         </div>
 
@@ -20,31 +20,35 @@
                 @csrf
                 @method('delete')
 
-                <h2 class="modal-title text-lg font-medium text-gray-900" id="confirm-user-deletion-label">
-                    {{ __('Are you sure you want to delete your account?') }}
-                </h2>
+                <div class="p-4">
 
-                <p class="mt-1 text-sm text-gray-600">
-                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-                </p>
+                    <h2 class="modal-title text-lg font-medium text-gray-900" id="confirm-user-deletion-label">
+                        {{ __('Are you sure you want to delete your account?') }}
+                    </h2>
 
-                <div class="mt-6">
-                    <label for="password" class="visually-hidden">{{ __('Password') }}</label>
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                    </p>
 
-                    <input id="password" name="password" type="password" class="form-control"
-                        placeholder="{{ __('Password') }}" />
+                    <div class="mt-6">
+                        <label for="password" class="visually-hidden">{{ __('Password') }}</label>
 
-                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-                </div>
+                        <input id="password" name="password" type="password" class="form-control"
+                            placeholder="{{ __('Password') }}" />
 
-                <div class="mt-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        {{ __('Cancel') }}
-                    </button>
+                        <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                    </div>
 
-                    <button type="submit" class="btn btn-danger ml-3">
-                        {{ __('Delete Account') }}
-                    </button>
+                    <div class="mt-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        <button type="submit" class="btn btn-danger ml-3">
+                            {{ __('Delete Account') }}
+                        </button>
+                    </div>
+
                 </div>
             </form>
         </div>

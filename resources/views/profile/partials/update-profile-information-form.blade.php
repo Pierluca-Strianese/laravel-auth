@@ -1,4 +1,6 @@
-<section>
+<section class="container-sm bg-body-secondary p-4 rounded">
+
+    <h3 class="text-primary border-bottom border-primary p-2"> Edit account </h3>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
@@ -47,6 +49,14 @@
                         </p>
                     @endif
                 </div>
+            @endif
+        </div>
+        <div class="d-flex align-items-center gap-4">
+            <button class="btn btn-primary">{{ __('Save') }}</button>
+
+            @if (session('status') === 'password-updated')
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-gray-600">Updated</p>
             @endif
         </div>
 

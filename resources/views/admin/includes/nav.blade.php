@@ -27,7 +27,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        {{-- <li><a class="dropdown-item" href="{{ route('admin.project.trash') }}">Trash</a></li> --}}
+                        <li><a class="dropdown-item" href="{{ route('admin.project.trashed') }}">Trash</a></li>
                     </ul>
                 </li>
             </ul>
