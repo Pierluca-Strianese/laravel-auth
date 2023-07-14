@@ -2,8 +2,8 @@
     $user = Auth::user();
 @endphp
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+    <div class="container-xxl">
         <a class="navbar-brand" href="{{ route('guests.home') }}">Boolfolio</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -11,7 +11,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
@@ -31,18 +31,21 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-5 mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {{ $user->name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit profile</a></li>
                         <li>
+                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit profile</a>
+                        </li>
+
+                        <li class="m-2">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button>Logout</button>
+                                <button type="button" class="btn btn-dark">Logout</button>
 
                             </form>
                         </li>
