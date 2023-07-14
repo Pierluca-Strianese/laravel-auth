@@ -3,9 +3,9 @@
 @section('contents')
     <h1>Edit Project</h1>
 
-    <form method="POST" action="{{ route('admin.project.update') }}">
+    <form method="POST" action="{{ route('admin.project.update', ['project' => $project]) }}" novalidate>
         @csrf
-        @method('PUT')
+        @method('put')
 
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -65,7 +65,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="10"
                 name="description" value="{{ old('description', $project->description) }}"></textarea>
             <div class="invalid-feedback">
                 @error('description')

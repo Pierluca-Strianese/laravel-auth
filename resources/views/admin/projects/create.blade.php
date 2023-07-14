@@ -3,7 +3,7 @@
 @section('contents')
     <h1>Add new Project</h1>
 
-    <form method="POST" action="{{ route('admin.project.store') }}">
+    <form method="POST" action="{{ route('admin.project.store') }}" novalidate>
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -76,7 +76,7 @@
         <div class="mb-3">
             <label for="languages" class="form-label">Languages</label>
             <input type="text" class="form-control @error('languages') is-invalid @enderror" id="languages"
-                rows="3" name="languages" value="{{ old('languages') }}">
+                rows="10" name="languages" value="{{ old('languages') }}">
             <div class="invalid-feedback">
                 @error('languages')
                     {{ $message }}
