@@ -17,7 +17,7 @@ return [
         "creation_date"    => "2023-04-26",
         "last_update"      => "2023-04-28",
         "collaborators"    => "",
-        "description"      => "A clone of Minefield",
+        "description"      => "A clone of Minefield ",
         "languages"        => "HTML, CSS, JS ",
         "link_github"      => "https://github.com/Pierluca-Strianese/js-campominato-dom",
     ],
